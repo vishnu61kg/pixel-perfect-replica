@@ -413,7 +413,7 @@ function Learning() {
   const ref = useRef<HTMLDivElement>(null);
   useEffect(() => {
     const io = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return; io.disconnect();
+      if (!e?.isIntersecting) return; io.disconnect();
       let n = 0; const t = setInterval(() => { n++; setShown(n); if (n >= list.length) clearInterval(t); }, 450);
     }, { threshold: 0.4 });
     if (ref.current) io.observe(ref.current); return () => io.disconnect();
