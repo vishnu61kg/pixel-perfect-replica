@@ -71,10 +71,10 @@ function Constellation() {
         if (d < R) { p.x += dx / d; p.y += dy / d; }
       }
       for (let i = 0; i < pts.length; i++) {
-        const a = pts[i];
+        const a = pts[i]!;
         ctx.fillStyle = cyan; ctx.globalAlpha = 0.7; ctx.fillRect(a.x, a.y, 2 * devicePixelRatio, 2 * devicePixelRatio);
         for (let j = i + 1; j < pts.length; j++) {
-          const b = pts[j], d = Math.hypot(a.x - b.x, a.y - b.y);
+          const b = pts[j]!, d = Math.hypot(a.x - b.x, a.y - b.y);
           if (d < R) { ctx.globalAlpha = (1 - d / R) * 0.25; ctx.strokeStyle = cyan; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
         }
       }
@@ -93,7 +93,7 @@ function Typer() {
   useEffect(() => {
     let i = 0, n = 0, del = false, t: ReturnType<typeof setTimeout>;
     const tick = () => {
-      const word = ROLES[i];
+      const word = ROLES[i]!;
       n += del ? -1 : 1; setText(word.slice(0, n));
       let d = del ? 40 : 80;
       if (!del && n === word.length) { del = true; d = 1600; }
@@ -253,11 +253,11 @@ function Skills() {
           </div>
           <div role="tabpanel" className="reveal relative min-h-80 rounded-3xl border bg-background p-6 md:p-10 lg:col-span-8">
             <div className="mb-8 flex items-center justify-between">
-              <span className="label">module://{SKILLS[sel].code.toLowerCase()}</span>
+              <span className="label">module://{SKILLS[sel]!.code.toLowerCase()}</span>
               <span className="flex items-center gap-2 font-mono text-xs text-cyan"><span className="status-dot h-1.5 w-1.5 rounded-full bg-cyan" />active</span>
             </div>
             <ul key={sel} className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-              {SKILLS[sel].items.map(([name, lvl], i) => (
+              {SKILLS[sel]!.items.map(([name, lvl], i) => (
                 <li key={name} tabIndex={0} data-hover className="skill-tile animate-in fade-in slide-in-from-bottom-2 rounded-2xl border bg-surface p-5" style={{ animationDelay: `${i * 80}ms` }}>
                   <span className="font-mono text-xs text-muted-foreground">0{i + 1}</span>
                   <p className="mt-6 font-display text-2xl">{name}</p>
