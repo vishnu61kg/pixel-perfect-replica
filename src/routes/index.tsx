@@ -72,10 +72,10 @@ function Constellation() {
       }
       for (let i = 0; i < pts.length; i++) {
         const a = pts[i]!;
-        ctx.fillStyle = cyan; ctx.globalAlpha = 0.7; ctx.fillRect(a.x, a.y, 2 * devicePixelRatio, 2 * devicePixelRatio);
+        ctx.fillStyle = cyan; ctx.globalAlpha = 0.35; ctx.fillRect(a.x, a.y, 2 * devicePixelRatio, 2 * devicePixelRatio);
         for (let j = i + 1; j < pts.length; j++) {
           const b = pts[j]!, d = Math.hypot(a.x - b.x, a.y - b.y);
-          if (d < R) { ctx.globalAlpha = (1 - d / R) * 0.25; ctx.strokeStyle = cyan; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
+          if (d < R) { ctx.globalAlpha = (1 - d / R) * 0.12; ctx.strokeStyle = cyan; ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke(); }
         }
       }
       if (!reduce) raf = requestAnimationFrame(draw);
@@ -151,14 +151,14 @@ function Hero() {
       <Constellation />
       <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-12">
         <div className="lg:col-span-8">
-          <p className="label reveal mb-6 flex items-center gap-3"><span className="status-dot h-2 w-2 rounded-full bg-cyan" />SYS.ONLINE — v2.0.26</p>
+          <p className="label reveal mb-6 flex items-center gap-3"><span className="status-dot h-2 w-2 rounded-full bg-cyan" />B.Sc. Computer Science · KG College of Arts and Science</p>
           <p className="reveal font-mono text-sm text-muted-foreground md:text-base">HELLO, WORLD. I'M</p>
-          <h1 className="reveal font-display text-[clamp(3.2rem,11vw,9.5rem)] font-extrabold uppercase leading-[0.85] tracking-tight">
-            Vishnu<br /><span className="text-outline">Priyan</span> <span className="text-glow">G</span>
+          <h1 className="reveal font-display text-[clamp(2.8rem,7.5vw,6.5rem)] font-bold leading-[0.95] tracking-tight">
+            Vishnu Priyan <span className="text-cyan">G</span>
           </h1>
           <p className="reveal mt-6 max-w-xl text-lg text-muted-foreground">Computer Science Student / Aspiring Developer</p>
           <p className="reveal mt-3 min-h-7 text-base md:text-lg"><Typer /></p>
-          <p className="reveal mt-8 border-l-2 border-violet pl-4 font-display text-xl italic">Curious mind. Creative code. Continuous growth.</p>
+          <p className="reveal mt-8 border-l-2 border-violet pl-4 font-display text-lg text-muted-foreground">Curious mind. Creative code. Continuous growth.</p>
           <div className="reveal mt-10 flex flex-wrap gap-4">
             <a href="#projects" className="group rounded-full bg-cyan px-7 py-3.5 font-semibold text-primary-foreground transition-transform hover:-translate-y-0.5">Explore My Work <span className="inline-block transition-transform group-hover:translate-x-1">→</span></a>
             <a href="#contact" className="rounded-full border px-7 py-3.5 font-semibold transition-colors hover:border-cyan hover:text-cyan">Let's Connect</a>
@@ -170,9 +170,7 @@ function Hero() {
             {Array.from({ length: 5 }, (_, i) => <i key={`x${i}`} style={{ transform: `rotateX(90deg) translateZ(${(i - 2) * 40}px) scale(${1 - Math.abs(i - 2) * 0.22})` }} />)}
           </div>
           <div className="absolute inset-[38%] rounded-full bg-primary/40 blur-2xl" />
-          <span className="label absolute -left-2 top-4">obj.sphere</span>
-          <span className="label absolute bottom-2 right-0">rot: ∞</span>
-        </div>
+                  </div>
       </div>
       <a href="#about" className="absolute bottom-8 left-6 flex items-center gap-3 md:left-12" aria-label="Scroll to about">
         <span className="relative block h-12 w-px overflow-hidden bg-border"><span className="scroll-line absolute inset-0 bg-cyan" /></span>
@@ -186,7 +184,7 @@ function SectionHead({ n, title }: { n: string; title: string }) {
   return (
     <div className="reveal mb-14 flex items-end gap-6">
       <span className="font-mono text-sm text-cyan">[{n}]</span>
-      <h2 className="font-display text-[clamp(2.2rem,6vw,4.8rem)] font-extrabold uppercase leading-none">{title}</h2>
+      <h2 className="font-display text-[clamp(2rem,4.5vw,3.5rem)] font-bold leading-tight tracking-tight">{title}</h2>
     </div>
   );
 }
@@ -200,7 +198,7 @@ function About() {
           <div className="reveal relative lg:col-span-5">
             <div className="relative aspect-[4/5] overflow-hidden rounded-3xl border bg-surface">
               <div className="grid-bg absolute inset-0 opacity-70" />
-              <div className="absolute inset-0 flex items-center justify-center font-display text-[11rem] font-extrabold leading-none text-outline">VP</div>
+              <div className="absolute inset-0 flex items-center justify-center font-display text-[9rem] font-bold leading-none text-outline opacity-60">VP</div>
               <div className="absolute left-5 top-5 label">ID // student.cs</div>
               <div className="absolute bottom-5 left-5 right-5 rounded-2xl border bg-background/80 p-4 backdrop-blur">
                 <p className="label">Currently exploring</p>
@@ -240,7 +238,7 @@ function Skills() {
   return (
     <section id="skills" className="bg-surface/50 px-6 py-28 md:px-12">
       <div className="mx-auto max-w-7xl">
-        <SectionHead n="02" title="Skill lab" />
+        <SectionHead n="02" title="Skills" />
         <div className="grid gap-8 lg:grid-cols-12">
           <div className="reveal flex gap-2 overflow-x-auto lg:col-span-4 lg:flex-col" role="tablist" aria-label="Skill categories">
             {SKILLS.map((s, i) => (
@@ -329,12 +327,12 @@ function Projects() {
   return (
     <section id="projects" className="px-6 py-28 md:px-12">
       <div className="mx-auto max-w-7xl">
-        <SectionHead n="03" title="Project showcase" />
+        <SectionHead n="03" title="Projects" />
         <p className="reveal -mt-8 mb-16 max-w-xl text-muted-foreground">These are planned beginner projects — the previews below are concept mockups, not finished builds.</p>
 
         {/* 01 — wide browser mock */}
         <article className="reveal group relative mb-32 grid items-center gap-10 lg:grid-cols-12">
-          <span className="pointer-events-none absolute -top-16 left-0 font-display text-[10rem] font-extrabold leading-none text-outline opacity-30">01</span>
+          <span className="pointer-events-none absolute -top-16 left-0 font-display text-[8rem] font-bold leading-none text-outline opacity-15">01</span>
           <div className="relative lg:col-span-7">
             <div className="overflow-hidden rounded-2xl border bg-surface transition-transform duration-700 group-hover:-rotate-1 group-hover:scale-[1.02]">
               <div className="flex gap-1.5 border-b px-4 py-3"><i className="h-2.5 w-2.5 rounded-full bg-destructive/70" /><i className="h-2.5 w-2.5 rounded-full bg-violet/70" /><i className="h-2.5 w-2.5 rounded-full bg-cyan/70" /><span className="ml-4 font-mono text-[0.65rem] text-muted-foreground">vishnu.dev</span></div>
@@ -371,7 +369,7 @@ function Projects() {
         {/* 03 — centered stacked */}
         <article className="reveal relative flex flex-col items-center text-center">
           <span className="font-mono text-sm text-cyan">PROJECT_03</span>
-          <h3 className="mt-3 font-display text-[clamp(2.4rem,6vw,4.5rem)] font-extrabold uppercase leading-none">Interactive<br /><span className="text-glow">Calculator</span></h3>
+          <h3 className="mt-3 font-display text-[clamp(2rem,4.5vw,3.5rem)] font-bold leading-tight">Interactive Calculator</h3>
           <div className="mt-4"><Status /></div>
           <p className="mt-6 max-w-lg text-muted-foreground">A calculator for basic arithmetic operations with an interactive keypad and a clean user interface.</p>
           <div className="mt-6 flex justify-center"><Tags list={TECH} /></div>
@@ -423,7 +421,7 @@ function Learning() {
       <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-12">
         <div className="reveal lg:col-span-5">
           <span className="font-mono text-sm text-cyan">[05]</span>
-          <h2 className="mt-3 font-display text-[clamp(2.2rem,5vw,4rem)] font-extrabold uppercase leading-none">The next version of me</h2>
+          <h2 className="mt-3 font-display text-[clamp(2rem,4.5vw,3.5rem)] font-bold leading-tight tracking-tight">The next version of me</h2>
         </div>
         <div ref={ref} className="reveal overflow-hidden rounded-2xl border bg-background font-mono text-sm lg:col-span-7">
           <div className="flex items-center justify-between border-b bg-surface px-4 py-2.5"><span className="text-muted-foreground">~/vishnu/roadmap</span><span className="text-xs text-cyan">zsh</span></div>
@@ -476,7 +474,7 @@ function Contact() {
       <div className="grid-bg absolute inset-0" aria-hidden />
       <div className="relative mx-auto max-w-7xl">
         <p className="label reveal">[07] contact</p>
-        <h2 className="reveal mt-4 font-display text-[clamp(2.8rem,9vw,8rem)] font-extrabold uppercase leading-[0.88]">Have an idea?<br /><span className="text-outline">Let's connect.</span></h2>
+        <h2 className="reveal mt-4 font-display text-[clamp(2.4rem,6vw,5rem)] font-bold leading-tight tracking-tight">Have an idea?<br /><span className="text-muted-foreground">Let's connect.</span></h2>
         <div className="mt-16 grid gap-12 lg:grid-cols-12">
           <div className="reveal space-y-6 lg:col-span-5">
             <a href={`mailto:${EMAIL}`} className="group block border-b pb-6"><span className="label">email</span><span className="mt-2 block break-all font-display text-xl group-hover:text-cyan md:text-2xl">{EMAIL} ↗</span></a>
@@ -535,8 +533,7 @@ function Index() {
   useEffects();
   return (
     <>
-      <div id="cursor" className="cursor-ring hidden md:block" aria-hidden />
-      <Nav />
+            <Nav />
       <main>
         <Hero /><About /><Skills /><Projects /><Education /><Learning /><Objective /><Contact />
       </main>
