@@ -38,7 +38,6 @@ function useEffects() {
       els.forEach((el) => { if (el.getBoundingClientRect().top < vh) el.classList.add("in"); else io.observe(el); });
       document.documentElement.classList.add("reveal-on");
     }
-    const safety = setTimeout(() => els.forEach((el) => el.classList.add("in")), 4000);
 
     // custom cursor (desktop only)
     const ring = document.getElementById("cursor");
@@ -48,7 +47,7 @@ function useEffects() {
     };
     const over = (e: Event) => ring?.classList.toggle("big", !!(e.target as HTMLElement).closest("a,button,[data-hover]"));
     if (fine && !reduce) { window.addEventListener("pointermove", move); window.addEventListener("pointerover", over); }
-    return () => { clearTimeout(safety); io.disconnect(); window.removeEventListener("pointermove", move); window.removeEventListener("pointerover", over); };
+    return () => { io.disconnect(); window.removeEventListener("pointermove", move); window.removeEventListener("pointerover", over); };
   }, []);
 }
 
