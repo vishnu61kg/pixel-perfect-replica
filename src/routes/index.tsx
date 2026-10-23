@@ -28,11 +28,17 @@ const ROLES = ["Aspiring Software Developer", "Web Development Enthusiast", "Lif
 function useEffects() {
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const els = document.querySelectorAll(".reveal");
     const io = new IntersectionObserver(
       (es) => es.forEach((e) => e.isIntersecting && (e.target.classList.add("in"), io.unobserve(e.target))),
-      { threshold: 0.15 },
+      { threshold: 0, rootMargin: "0px 0px -5% 0px" },
     );
-    document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+    if (!reduce) {
+      const vh = window.innerHeight;
+      els.forEach((el) => { if (el.getBoundingClientRect().top < vh) el.classList.add("in"); else io.observe(el); });
+      document.documentElement.classList.add("reveal-on");
+    }
+    const safety = setTimeout(() => els.forEach((el) => el.classList.add("in")), 4000);
 
     // custom cursor (desktop only)
     const ring = document.getElementById("cursor");
@@ -42,7 +48,7 @@ function useEffects() {
     };
     const over = (e: Event) => ring?.classList.toggle("big", !!(e.target as HTMLElement).closest("a,button,[data-hover]"));
     if (fine && !reduce) { window.addEventListener("pointermove", move); window.addEventListener("pointerover", over); }
-    return () => { io.disconnect(); window.removeEventListener("pointermove", move); window.removeEventListener("pointerover", over); };
+    return () => { clearTimeout(safety); io.disconnect(); window.removeEventListener("pointermove", move); window.removeEventListener("pointerover", over); };
   }, []);
 }
 
