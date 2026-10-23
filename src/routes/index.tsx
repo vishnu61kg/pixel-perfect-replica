@@ -151,7 +151,7 @@ function Hero() {
       <Constellation />
       <div className="relative mx-auto grid w-full max-w-7xl items-center gap-12 lg:grid-cols-12">
         <div className="lg:col-span-8">
-          <p className="label reveal mb-6 flex items-center gap-3"><span className="status-dot h-2 w-2 rounded-full bg-cyan" />SYS.ONLINE — 11.41°N / 76.70°E</p>
+          <p className="label reveal mb-6 flex items-center gap-3"><span className="status-dot h-2 w-2 rounded-full bg-cyan" />SYS.ONLINE — v2.0.26</p>
           <p className="reveal font-mono text-sm text-muted-foreground md:text-base">HELLO, WORLD. I'M</p>
           <h1 className="reveal font-display text-[clamp(3.2rem,11vw,9.5rem)] font-extrabold uppercase leading-[0.85] tracking-tight">
             Vishnu<br /><span className="text-outline">Priyan</span> <span className="text-glow">G</span>
@@ -217,7 +217,7 @@ function About() {
               I'm passionate about technology, programming, and exploring new ideas. I'm developing my skills in web development and programming while learning how to build creative and useful applications. I enjoy learning new technologies, solving problems, and improving my technical knowledge. My goal is to become a skilled software developer and create projects that make a positive impact.
             </p>
             <dl className="mt-12 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border bg-border sm:grid-cols-3">
-              {[["Focus", "Web dev"], ["Mode", "Learning"], ["Base", "Coimbatore, TN"]].map(([k, v]) => (
+              {[["Focus", "Web dev"], ["Mode", "Learning"], ["Year", "Second"]].map(([k, v]) => (
                 <div key={k} className="bg-background p-5"><dt className="label">{k}</dt><dd className="mt-2 font-display text-lg">{v}</dd></div>
               ))}
             </dl>
