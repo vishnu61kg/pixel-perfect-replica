@@ -461,9 +461,9 @@ function Contact() {
     if (f.get("website") || Date.now() - loadedAt.current < 2500) { setStatus({ type: "err", msg: "Something looked automated. Please try again." }); return; }
     const name = String(f.get("name") || "").trim(), email = String(f.get("email") || "").trim(), message = String(f.get("message") || "").trim();
     const errs: Record<string, string> = {};
-    if (name.length < 2 || name.length > 80) errs.name = "Please enter your name.";
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || email.length > 200) errs.email = "Please enter a valid email.";
-    if (message.length < 10 || message.length > 2000) errs.message = "Message should be 10–2000 characters.";
+    if (name.length < 2 || name.length > 80) errs["name"] = "Please enter your name.";
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email) || email.length > 200) errs["email"] = "Please enter a valid email.";
+    if (message.length < 10 || message.length > 2000) errs["message"] = "Message should be 10–2000 characters.";
     setErrors(errs);
     if (Object.keys(errs).length) { setStatus({ type: "err", msg: "Please fix the highlighted fields." }); return; }
     const body = encodeURIComponent(`${message}\n\n— ${name} (${email})`);
@@ -499,8 +499,8 @@ function Contact() {
             ))}
             <div>
               <label htmlFor="message" className="label mb-2 block">message</label>
-              <textarea id="message" name="message" rows={5} aria-invalid={!!errors.message} aria-describedby="message-err" className={`${field} resize-none ${errors.message ? "border-destructive" : ""}`} />
-              {errors.message && <p id="message-err" className="mt-1.5 text-sm text-destructive">{errors.message}</p>}
+              <textarea id="message" name="message" rows={5} aria-invalid={!!errors["message"]} aria-describedby="message-err" className={`${field} resize-none ${errors["message"] ? "border-destructive" : ""}`} />
+              {errors["message"] && <p id="message-err" className="mt-1.5 text-sm text-destructive">{errors["message"]}</p>}
             </div>
             <button type="submit" className="w-full rounded-full bg-foreground py-4 font-semibold text-background transition-colors hover:bg-cyan">Compose message →</button>
             {status && <p role="status" className={`rounded-xl border p-3 text-sm ${status.type === "ok" ? "border-cyan text-cyan" : "border-destructive text-destructive"}`}>{status.msg}</p>}
